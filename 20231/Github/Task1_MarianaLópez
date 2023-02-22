@@ -1,0 +1,27 @@
+#!/bin/bash
+
+#SBATCH --partition=learning                   # Partition
+#SBATCH --nodes=1
+#SBATCH --ntasks=1                              # Number of tasks (processes)
+#SBATCH --time=0-1:00:00                           # Walltime
+#SBATCH --job-name=test_Genoma_gpu                     # Job name
+#SBATCH --output=%x_%j.out                      # Stdout (%x-jobName, %j-jobId)
+#SBATCH --error=%x_%j.err                       # Stderr (%x-jobName, %j-jobId)
+#SBATCH --mail-type=ALL                         # Mail notification
+#SBATCH --mail-user=mlopezg11@eafit.edu.co       # User Email
+
+
+##### ENVIRONMENT CREATION #####
+module load python/3.6.0_miniconda-4.3.11_gcc-11.2.0
+#source activate tensorflow_test
+
+##### JOB COMMANDS #####
+source activate Test
+
+#14 de febrero 2023 - Mariana López G. 
+ls -oh *sh
+open Genoma_SARSCov2.txt
+echo "El total de nucleotidos dentro de la secuencia es de (bp):"
+#grep -v ">" Genoma_SARSCov2.txt | tr -d "\n" | wc -c
+echo $1
+grep -v ">" $1 | tr -d "\n" | wc -c
